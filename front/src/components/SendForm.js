@@ -15,7 +15,7 @@ const SendForm = (props) => {
             "position":"absolute",
             "bottom":0,
         }}
-        className="container mx-auto px-4 sm:px-24 my-4 sm:my-12 flex items-center justify-between w-full p-3 border-t border-gray-300"
+        className=" mx-auto px-4 sm:px-24 my-4 sm:my-12 flex items-center justify-between w-full p-3 border-t border-gray-300"
     >
         <input 
             type="text" 
