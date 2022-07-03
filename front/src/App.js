@@ -21,15 +21,15 @@ function App() {
     }, []);
 
     const onConnect = ()=>{
-        setLogs(logs => [...logs, "onConnect."]);
+        setLogs(logs => [...logs, {type:"notice",body:"onConnect."}]);
     };
 
     const onDisConnect = ()=>{
-        setLogs(logs => [...logs, "onDisconnect."]);
+        setLogs(logs => [...logs,  {type:"notice",body:"onDisconnect."}]);
     };
 
     const receiveMessage = (e)=>{
-        setLogs(logs => [...logs,e.data]);
+        setLogs(logs => [...logs, {type:"message",body:e.data}]);
     };
 
     return (

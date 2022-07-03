@@ -37,7 +37,7 @@ export default class Socket {
 
     message(e){
         try{
-            this.ee.emit("message",e)
+            this.ee.emit("message",{type:"message",body:e})
         }
         catch(err){
             this.ee.emit('error',err)
