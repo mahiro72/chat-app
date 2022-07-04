@@ -17,10 +17,10 @@ const UserForm = (props) => {
             Your Name : &nbsp;
             <input 
                 type="text" 
-                placeholder="Message"
+                placeholder="Name"
                 className="outline-none"
                 style={{"width":"100px"}}
-                name="message" 
+                name="name" 
                 required
                 value={newUserName}
                 onChange={(e)=>{setNewUserName(e.target.value)}}
@@ -29,6 +29,7 @@ const UserForm = (props) => {
             <button
                 className="bg-transparent hover:bg-blue-200 text-blue-400 font-semibold hover:text-white py-1 px-2 hover:border-transparent rounded"
                 onClick={()=>{props.setUserName(newUserName)}}
+                disabled={!newUserName}
             >
                 change
             </button>
