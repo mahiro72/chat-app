@@ -11,35 +11,47 @@ export default class Socket {
         ws.onerror = this.error.bind(this);
     };
 
+    // eName で eventの登録
     on(eName, fn){
         this.ee.on(eName, fn);
     };
 
+    // eNameのeventの削除
     off(eName,fn){
         this.ee.removeListener(eName, fn);
     };
 
+    // connect event の実行
     open(){
         this.ee.emit('connect');
     };
 
+    // disconnect event の実行
     close(){
         this.ee.emit('disconnect');
     };
 
+    // errを引数にとりlog出力
     error(err){
         console.log("web socket error : ",err);
     };
 
-    emit(data) {
-        this.ws.send(data)
+    // websocketで送信をする
+    send(name,body) {
+        this.ws.send(JSON.stringify({
+            name:name,
+            body:body
+        }))
     }
 
+    // serverからmessageを受け取ったら実行
     message(e){
         try{
-            this.ee.emit("message",{type:"message",body:e})
+            // message eventの実行
+            this.ee.emit("message",JSON.parse(e.data))
         }
         catch(err){
+            // error eventの実行
             this.ee.emit('error',err)
             console.log(Date().toString()+" : ",err)
         }

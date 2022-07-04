@@ -1,9 +1,21 @@
 import React from 'react'
 
-const Title = () => {
+const Title = (props) => {
   return (
-    <div class="relative flex items-center p-3 border-b border-gray-300">
-        <span class="text-2xl container mx-auto px-4 sm:px-24 block ml-2 font-bold text-gray-600">Welcome to Chat App 🎉</span>
+    <div class=" border-b border-gray-300">
+        <div className='max-w-6xl flex items-center p-3 mx-auto justify-between'>
+            <span class=" text-2xl px-4 sm:px-24 ml-2 font-bold text-gray-600 py-4">
+                Welcome to Chat App 🎉
+            </span>
+            <div>
+                <p className='text-xl text-gray-600'>
+                    hello, {props.userName}
+                </p>
+            </div>
+
+        </div>
+
+
     </div>
   )
 }
