@@ -31,14 +31,15 @@ var (
 var upgrader = websocket.Upgrader{
 	ReadBufferSize:  1024,
 	WriteBufferSize: 1024,
-	// Cross-Originのチェックを無効にしてる。セキュリティ的にはよろしくないので注意。
+
+	// Cross-Originのチェックを無効
 	// https://godoc.org/github.com/gorilla/websocket#hdr-Origin_Considerations
 	CheckOrigin: func(r *http.Request) bool {
 		return true
 	},
 }
 
-// Client is a middleman between the websocket connection and the hub.
+// クライアントは、ウェブソケット接続とハブの中間的な存在
 type Client struct {
 	hub *Hub
 
@@ -55,11 +56,15 @@ type Client struct {
 // ensures that there is at most one reader on a connection by executing all
 // reads from this goroutine.
 func (c *Client) readPump() {
+	// 関数終了時にclientをunregisterする
 	defer func() {
 		c.hub.unregister <- c
 		c.conn.Close()
 	}()
+
+	// 読み取りサイズ
 	c.conn.SetReadLimit(maxMessageSize)
+	// 読み取り期限
 	c.conn.SetReadDeadline(time.Now().Add(pongWait))
 	c.conn.SetPongHandler(func(string) error { c.conn.SetReadDeadline(time.Now().Add(pongWait)); return nil })
 	for {
